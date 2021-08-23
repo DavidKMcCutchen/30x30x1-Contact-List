@@ -1,0 +1,73 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h1>
+          <span *ngIf="currentContact.id; else createContact">{{
+            originalTitle
+          }}</span>
+          <ng-template #createContact>Create Contact</ng-template>
+        </h1>
+      </mat-card-title>
+    </mat-card-header>
+    <form
+      #formDirective="ngForm"
+      [formGroup]="form"
+      (ngSubmit)="saveForm(formDirective)"
+    >
+      <mat-card-content>
+        <mat-form-field class="full-width" appearance="outline" floatlabel>
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Name"
+            formControlName="name"
+            type="text"
+            name="name"
+          />
+          <mat-error *ngIf="form.get('title')">Required Field</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="outline" floatlabel>
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            placeholder="Phone Number"
+            formControlName="phoneNumber"
+            type="text"
+            name="phoneNumber"
+          />
+          <mat-error *ngIf="form.get('description')">Required Field</mat-error>
+        </mat-form-field>
+        <section class="full-width">
+          <mat-label>
+            Friendship Level: {{ form.get('friendMeter')?.value }}
+          </mat-label>
+          <mat-slider
+            class="full-width"
+            formControlName="friendMeter"
+            min="0"
+            max="9000"
+            thumbLabel
+            tickInterval="1"
+          >
+          </mat-slider>
+        </section>
+        <section>
+          <mat-checkbox formControlName="inContact" placeholder="In Contact?"
+            >Contact?</mat-checkbox
+          >
+        </section>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button type="submit" [disabled]="form.invalid">
+          {{ currentContact.id ? 'Update' : 'Create' }}
+        </button>
+        <button
+          mat-button
+          type="button"
+          (click)="cancelled.emit(currentContact)"
+        >
+          Cancel
+        </button>
+      </mat-card-actions>
+    </form>
+

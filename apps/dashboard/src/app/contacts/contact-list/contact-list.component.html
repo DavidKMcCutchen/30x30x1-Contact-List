@@ -1,0 +1,25 @@
+<mat-card class="list">
+    <mat-card-header>
+      <mat-card-title> <h1>Select a Contact</h1> </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let contact of contacts"
+          (click)="selected.emit(contact)"
+          class="mat-list-item"
+        >
+          <h1 matLine>{{ contact.name }}</h1>
+          <p matLine>{{ contact.phoneNumber }}</p>
+          <p matLine>{{ contact.friendMeter }} Friend Points</p>
+
+          <button
+            mat-icon-button
+            (click)="deleted.emit(contact.id); $event.stopImmediatePropagation()"
+          >
+            <mat-icon *ngIf="!readonly">cancel</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>

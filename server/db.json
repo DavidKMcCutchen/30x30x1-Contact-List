@@ -1,0 +1,11 @@
+{
+    "contacts": [
+        {
+        "id": 1,
+        "name": "wsaF",
+        "phoneNumber": "SAdasDas",
+        "friendMeter": null,
+        "inContact": false
+        }
+    ]
+}
